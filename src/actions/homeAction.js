@@ -1,9 +1,12 @@
 
 import * as actions from "../constants/constants";
 
-export const simpleAction = () => ({
+export const simpleAction = (mailId, password) => ({
   type: 'SIMPLE_ACTION',
-  payload: 'result_of_simple_action'
+  payload: {
+    mailId,
+    password,
+  },
 });
 
 

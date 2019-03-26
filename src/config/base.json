@@ -1,0 +1,11 @@
+{
+  "base": {
+    "url": "http://dev.api.staller.show/"
+  },
+  "api": {
+    "version": "v1/",
+    "login": "users/login",
+    "modifyHorses": "horses/:horseId",
+    "horses": "horses"
+  }
+}
