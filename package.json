@@ -5,6 +5,7 @@
   "homepage": "https://thamizhselvan93.github.io/CRUD-example-application/",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
+    "gh-pages": "^2.0.1",
     "history": "^4.9.0",
     "js-sha512": "^0.8.0",
     "react": "^16.8.4",
@@ -22,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
