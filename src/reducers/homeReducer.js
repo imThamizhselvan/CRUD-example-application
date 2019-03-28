@@ -7,7 +7,7 @@ const initialState = {
 
 export default function homeReducer(state = initialState, action) {
   switch (action.type) {
-    case constants.SIMPLE_ACTION:
+    case constants.LOGIN:
       return { ...state, fetching: true}
     case constants.PUT_ACTION:
       return { ...state, data: action.data, fetching: false}

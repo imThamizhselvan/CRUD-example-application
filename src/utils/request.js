@@ -23,6 +23,7 @@ function parseJSON(response) {
 export function makeReqOptions(params) {
   const options = {
     method: 'GET',
+    apiKey: '',
     headers: {
       Accept: '*/*',
     },
@@ -32,7 +33,8 @@ export function makeReqOptions(params) {
   options.headers['Content-Type'] = 'application/json';
 
   if (params.apiKey) {
-    options.headers['Authorization'] = 'Bearer' + localStorage.getItem('fresco_talk.api_key');
+    console.log('apikey');
+    options.headers['Authorization'] = 'Bearer' + localStorage.getItem('access_token');
   }
 
 
@@ -51,7 +53,7 @@ export function makeReqOptions(params) {
     } else {
       // this is to handle multipart-formdata and other such content types
       options.body = params.data;
-      // options.mode = 'no-cors';
+      options.mode = 'no-cors';
     }
   } else if ((options.method === 'GET' || params.method === 'DELETE') && params.data) {
     options.queryParams = params.data;

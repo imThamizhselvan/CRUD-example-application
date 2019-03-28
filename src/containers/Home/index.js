@@ -1,37 +1,57 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { simpleAction } from '../../actions/homeAction';
-import { Wrapper } from './styles';
+import { BigText } from '../Login/styles';
+import CreateHorses from '../CreateHorses';
+import DeleteHorses from '../DeleteHorses';
+import ListHorses from '../ListHorses';
+import { Wrapper, Operations, Items, SideNavWrapper,  MainWrapper, BottomArea } from './styles';
+import history from '../App/history';
 
-class Home extends Component {
+
+export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      mailId: '',
-      password: '',
+      addHorses: false,
+      listHorses: false,
+      deleteHorses: false
     }
   }
-  simpleAction = () => {
-    this.props.simpleAction(this.state.mailId, this.state.password);
+
+  handleLogout = () => {
+    localStorage.setItem("access_token", "");
+    history.push('/');
   }
+
   render() {
     return (
       <Wrapper>
-        <input type="text" value={this.state.mailId} onChange={evt => this.setState({mailId: evt.target.value})} />
-        <input type="password" value={this.state.password} onChange={evt => this.setState({password: evt.target.value})} />
-        <button onClick={this.simpleAction}>Test redux action</button>
-        <p> {this.props.homeReducer.data.title} </p>
+        <SideNavWrapper>
+          <BigText>
+            The Horses Hub
+          </BigText> 
+          <Operations>
+            <Items onClick={() => this.setState({addHorses: true, listHorses: false, deleteHorses: false})}>
+              Add new Horses
+            </Items>
+            <Items onClick={() => this.setState({listHorses: true, addHorses: false, deleteHorses: false})}>
+              List all Horses
+            </Items>
+            <Items onClick={() => this.setState({deleteHorses: true, listHorses: false, addHorses: false})}>
+              Delete Horses
+            </Items>
+          </Operations>
+          <BottomArea onClick={this.handleLogout}>
+                Logout
+          </BottomArea>
+        </SideNavWrapper>
+        <MainWrapper>
+          {this.state.addHorses && <CreateHorses /> }
+          {this.state.deleteHorses && <DeleteHorses />}
+          {this.state.listHorses && <ListHorses /> }
+        </MainWrapper>
       </Wrapper>
+
     );
   }
 }
 
-const mapStateToProps = state => ({
-  ...state
-})
-
-const mapDispatchToProps = dispatch => ({
-  simpleAction: (mailId, password) => dispatch(simpleAction(mailId, password))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
